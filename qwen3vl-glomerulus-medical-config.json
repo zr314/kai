@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "qwen3vl-glomerulus-medical-infer": {
+      "command": "conda",
+      "args": ["run", "-n", "qwen3vl", "python", "mcp_server.py"],
+      "env": {},
+      "workingDirectory": "."
+    }
+  }
+}
