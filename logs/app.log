@@ -3,3 +3,46 @@
 {"timestamp": "2026-03-11T07:33:22.629250Z", "level": "INFO", "logger": "config.logger", "message": "日志系统初始化完成", "module": "logger", "function": "init", "line": 197}
 {"timestamp": "2026-03-11T07:33:22.629250Z", "level": "INFO", "logger": "test", "message": "Test log message", "module": "test_config", "function": "<module>", "line": 9}
 {"timestamp": "2026-03-11T07:33:22.629250Z", "level": "INFO", "logger": "test", "message": "Log with request ID", "module": "test_config", "function": "<module>", "line": 12}
+{"timestamp": "2026-03-11T14:27:10.367479Z", "level": "INFO", "logger": "config.logger", "message": "日志系统初始化完成", "module": "logger", "function": "init", "line": 197}
+{"timestamp": "2026-03-11T14:27:10.408040Z", "level": "INFO", "logger": "src.registry", "message": "工具已加载: infer_medical_image", "module": "registry", "function": "_load_from_config", "line": 65}
+{"timestamp": "2026-03-11T14:27:10.408040Z", "level": "INFO", "logger": "src.registry", "message": "工具已加载: search_knowledge_base", "module": "registry", "function": "_load_from_config", "line": 65}
+{"timestamp": "2026-03-11T14:27:58.667202Z", "level": "INFO", "logger": "config.logger", "message": "日志系统初始化完成", "module": "logger", "function": "init", "line": 197}
+{"timestamp": "2026-03-11T14:27:58.687628Z", "level": "INFO", "logger": "src.registry", "message": "工具已加载: infer_medical_image", "module": "registry", "function": "_load_from_config", "line": 65}
+{"timestamp": "2026-03-11T14:27:58.687628Z", "level": "INFO", "logger": "src.registry", "message": "工具已加载: search_knowledge_base", "module": "registry", "function": "_load_from_config", "line": 65}
+{"timestamp": "2026-03-11T14:27:58.822288Z", "level": "INFO", "logger": "src.db.connection", "message": "MySQL 连接成功", "module": "connection", "function": "_connect", "line": 43}
+{"timestamp": "2026-03-11T14:27:58.832455Z", "level": "INFO", "logger": "__main__", "message": "开始上下文管理验证...", "module": "test_context", "function": "main", "line": 148}
+{"timestamp": "2026-03-11T14:27:58.832455Z", "level": "INFO", "logger": "__main__", "message": "=== 测试会话管理 ===", "module": "test_context", "function": "test_session", "line": 28}
+{"timestamp": "2026-03-11T14:27:58.842750Z", "level": "INFO", "logger": "src.context.session", "message": "创建会话: bcf7f86f-a3be-4179-8edd-a94f7ad41680, user_id: test_user", "module": "session", "function": "create_session", "line": 43}
+{"timestamp": "2026-03-11T14:27:58.842750Z", "level": "INFO", "logger": "__main__", "message": "创建会话: bcf7f86f-a3be-4179-8edd-a94f7ad41680", "module": "test_context", "function": "test_session", "line": 34}
+{"timestamp": "2026-03-11T14:27:58.842750Z", "level": "INFO", "logger": "__main__", "message": "会话状态: active", "module": "test_context", "function": "test_session", "line": 38}
+{"timestamp": "2026-03-11T14:27:58.852239Z", "level": "DEBUG", "logger": "src.context.session", "message": "更新会话: bcf7f86f-a3be-4179-8edd-a94f7ad41680, fields: ['metadata', 'last_active_at']", "module": "session", "function": "update_session", "line": 75}
+{"timestamp": "2026-03-11T14:27:58.853250Z", "level": "INFO", "logger": "src.context.session", "message": "创建会话: 2eaae29b-8493-4bfd-82f3-2cf57cd1738e, user_id: test_user", "module": "session", "function": "create_session", "line": 43}
+{"timestamp": "2026-03-11T14:27:58.853250Z", "level": "INFO", "logger": "__main__", "message": "创建第二个会话: 2eaae29b-8493-4bfd-82f3-2cf57cd1738e", "module": "test_context", "function": "test_session", "line": 45}
+{"timestamp": "2026-03-11T14:27:58.853250Z", "level": "INFO", "logger": "__main__", "message": "用户活跃会话数: 2", "module": "test_context", "function": "test_session", "line": 49}
+{"timestamp": "2026-03-11T14:27:58.863782Z", "level": "DEBUG", "logger": "src.context.session", "message": "更新会话: bcf7f86f-a3be-4179-8edd-a94f7ad41680, fields: ['status', 'last_active_at']", "module": "session", "function": "update_session", "line": 75}
+{"timestamp": "2026-03-11T14:27:58.863782Z", "level": "INFO", "logger": "__main__", "message": "会话 bcf7f86f-a3be-4179-8edd-a94f7ad41680 已关闭", "module": "test_context", "function": "test_session", "line": 53}
+{"timestamp": "2026-03-11T14:27:58.863782Z", "level": "INFO", "logger": "__main__", "message": "=== 测试对话管理 ===", "module": "test_context", "function": "test_conversation", "line": 60}
+{"timestamp": "2026-03-11T14:27:58.868333Z", "level": "DEBUG", "logger": "src.context.conversation", "message": "添加消息: session=bcf7f86f-a3be-4179-8edd-a94f7ad41680, role=user, message_id=1", "module": "conversation", "function": "add_message", "line": 50}
+{"timestamp": "2026-03-11T14:27:58.868333Z", "level": "INFO", "logger": "__main__", "message": "添加用户消息: 1", "module": "test_context", "function": "test_conversation", "line": 66}
+{"timestamp": "2026-03-11T14:27:58.874093Z", "level": "DEBUG", "logger": "src.context.conversation", "message": "添加消息: session=bcf7f86f-a3be-4179-8edd-a94f7ad41680, role=assistant, message_id=2", "module": "conversation", "function": "add_message", "line": 50}
+{"timestamp": "2026-03-11T14:27:58.874093Z", "level": "INFO", "logger": "__main__", "message": "添加助手消息: 2", "module": "test_context", "function": "test_conversation", "line": 70}
+{"timestamp": "2026-03-11T14:27:58.884289Z", "level": "DEBUG", "logger": "src.context.conversation", "message": "添加消息: session=bcf7f86f-a3be-4179-8edd-a94f7ad41680, role=tool, message_id=3", "module": "conversation", "function": "add_message", "line": 50}
+{"timestamp": "2026-03-11T14:27:58.884289Z", "level": "INFO", "logger": "__main__", "message": "添加工具消息: 3", "module": "test_context", "function": "test_conversation", "line": 74}
+{"timestamp": "2026-03-11T14:27:58.884827Z", "level": "INFO", "logger": "__main__", "message": "对话历史条数: 3", "module": "test_context", "function": "test_conversation", "line": 78}
+{"timestamp": "2026-03-11T14:27:58.884827Z", "level": "INFO", "logger": "__main__", "message": "格式化历史:\n[USER] 帮我分析这张肾小球病理图片\n[ASSISTANT] 好的，请提供图片路径\n[Tool: infer_medical_image] 图像分析完成：FSGS改变", "module": "test_context", "function": "test_conversation", "line": 82}
+{"timestamp": "2026-03-11T14:27:58.884827Z", "level": "INFO", "logger": "__main__", "message": "消息总数: 3", "module": "test_context", "function": "test_conversation", "line": 86}
+{"timestamp": "2026-03-11T14:27:58.884827Z", "level": "INFO", "logger": "__main__", "message": "=== 测试工具调用记录 ===", "module": "test_context", "function": "test_tool_call", "line": 91}
+{"timestamp": "2026-03-11T14:27:58.894429Z", "level": "DEBUG", "logger": "src.context.tool_call", "message": "记录工具执行: infer_medical_image, call_id=1, status=success", "module": "tool_call", "function": "record_tool_execution", "line": 116}
+{"timestamp": "2026-03-11T14:27:58.894429Z", "level": "INFO", "logger": "__main__", "message": "记录工具调用: 1", "module": "test_context", "function": "test_tool_call", "line": 103}
+{"timestamp": "2026-03-11T14:27:58.894429Z", "level": "INFO", "logger": "__main__", "message": "工具调用记录数: 1", "module": "test_context", "function": "test_tool_call", "line": 107}
+{"timestamp": "2026-03-11T14:27:58.894429Z", "level": "INFO", "logger": "__main__", "message": "工具统计: [{'tool_name': 'infer_medical_image', 'call_count': 1, 'success_count': Decimal('1'), 'error_count': Decimal('0'), 'avg_duration_ms': None}]", "module": "test_context", "function": "test_tool_call", "line": 111}
+{"timestamp": "2026-03-11T14:27:58.894429Z", "level": "INFO", "logger": "__main__", "message": "=== 测试任务管理 ===", "module": "test_context", "function": "test_task", "line": 116}
+{"timestamp": "2026-03-11T14:27:58.899986Z", "level": "INFO", "logger": "src.context.task", "message": "创建任务: 49bdf66d-4cb", "module": "task", "function": "create", "line": 55}
+{"timestamp": "2026-03-11T14:27:58.899986Z", "level": "INFO", "logger": "__main__", "message": "创建任务: 49bdf66d-4cb", "module": "test_context", "function": "test_task", "line": 123}
+{"timestamp": "2026-03-11T14:27:58.935811Z", "level": "DEBUG", "logger": "src.context.task", "message": "保存结果: 49bdf66d-4cb/diagnosis.json", "module": "task", "function": "add_result", "line": 119}
+{"timestamp": "2026-03-11T14:27:58.956345Z", "level": "INFO", "logger": "src.context.task", "message": "生成报告: 49bdf66d-4cb/report.md", "module": "task", "function": "generate_report", "line": 166}
+{"timestamp": "2026-03-11T14:27:58.956345Z", "level": "INFO", "logger": "__main__", "message": "生成报告: tasks\\49bdf66d-4cb\\results\\report.md", "module": "test_context", "function": "test_task", "line": 138}
+{"timestamp": "2026-03-11T14:27:58.956345Z", "level": "INFO", "logger": "__main__", "message": "任务总数: 1", "module": "test_context", "function": "test_task", "line": 142}
+{"timestamp": "2026-03-11T14:27:58.956345Z", "level": "INFO", "logger": "__main__", "message": "\n=== 验证完成 ===", "module": "test_context", "function": "main", "line": 162}
+{"timestamp": "2026-03-11T14:27:58.956345Z", "level": "INFO", "logger": "__main__", "message": "会话ID: bcf7f86f-a3be-4179-8edd-a94f7ad41680", "module": "test_context", "function": "main", "line": 163}
+{"timestamp": "2026-03-11T14:27:58.956345Z", "level": "INFO", "logger": "__main__", "message": "任务ID: 49bdf66d-4cb", "module": "test_context", "function": "main", "line": 164}

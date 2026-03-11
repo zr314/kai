@@ -1,0 +1,36 @@
+{
+  "task_id": "49bdf66d-4cb",
+  "created_at": "2026-03-11T22:27:58.899986",
+  "status": "created",
+  "metadata": {
+    "type": "病理分析",
+    "priority": "high"
+  },
+  "steps": [
+    {
+      "name": "image_receive",
+      "data": {
+        "image": "1.png",
+        "size": "2MB"
+      },
+      "timestamp": "2026-03-11T22:27:58.904796"
+    },
+    {
+      "name": "infer",
+      "data": {
+        "result": "FSGS",
+        "confidence": 0.95
+      },
+      "timestamp": "2026-03-11T22:27:58.915571"
+    },
+    {
+      "name": "rag_search",
+      "data": {
+        "query": "FSGS treatment",
+        "results": 5
+      },
+      "timestamp": "2026-03-11T22:27:58.925568"
+    }
+  ],
+  "updated_at": "2026-03-11T22:27:58.925568"
+}

@@ -17,6 +17,15 @@ agent/
 │   ├── __init__.py
 │   ├── model_infer.py           # 图像推理模块
 │   ├── registry.py              # MCP 工具注册中心
+│   ├── db/                      # 数据库模块
+│   │   ├── __init__.py
+│   │   └── connection.py        # MySQL 连接管理
+│   ├── context/                 # 上下文管理
+│   │   ├── __init__.py
+│   │   ├── session.py           # 会话上下文
+│   │   ├── conversation.py      # 对话上下文
+│   │   ├── tool_call.py         # 工具调用记录
+│   │   └── task.py              # 任务上下文
 │   ├── rag.py                   # RAG 数据导入
 │   ├── sql.py                   # 数据库操作
 │   └── rag_sql.py               # RAG+SQL 混合查询
@@ -24,8 +33,11 @@ agent/
 │   ├── mcp_server.py            # MCP 服务器 (stdio 模式)
 │   ├── api_server.py            # FastAPI 服务 (HTTP 模式)
 │   └── llm_client.py            # LLM 调用示例
+├── sql/                         # SQL 脚本
+│   └── init_database.sql        # 数据库初始化脚本
 ├── tests/                       # 测试代码
 ├── rag/                         # RAG 知识库数据
+├── tasks/                       # 任务上下文存储
 ├── Qwen3-VL-4B-Instruct/        # 基础模型
 ├── qwen3vl-4b-medical-lora-sft/ # 微调模型
 └── 1.png                        # 测试图片
@@ -123,6 +135,176 @@ port = get('milvus.port')
 
 # 获取完整配置
 config = get_config()
+```
+
+## 上下文管理
+
+项目提供三种类型的上下文管理，分别用于不同的业务场景。
+
+### 1. 初始化数据库
+
+在首次使用前，需要初始化 MySQL 数据库：
+
+```bash
+# 执行 SQL 脚本创建数据库和表
+mysql -u root -p < sql/init_database.sql
+
+# 或在 MySQL 客户端中执行
+source sql/init_database.sql
+```
+
+SQL 脚本位置：`sql/init_database.sql`
+
+### 2. 环境配置
+
+在 `.env` 文件中添加 MySQL 密码：
+
+```bash
+DASHSCOPE_API_KEY=your_api_key_here
+MYSQL_PASSWORD=your_mysql_password
+```
+
+### 3. 上下文类型说明
+
+| 类型 | 存储方式 | 用途 | 生命周期 |
+|------|----------|------|----------|
+| 会话上下文 | MySQL | 用户会话管理 | 短期，超时后标记关闭 |
+| 对话上下文 | MySQL | 多轮对话历史 | 长期保存 |
+| 任务上下文 | 文件 (JSON/MD) | 完整任务流程，含图片 | 长期保存，可生成报告 |
+
+### 4. 代码示例
+
+#### 会话管理
+
+```python
+from src.context import get_session_manager
+
+session_mgr = get_session_manager()
+
+# 创建会话
+session_id = session_mgr.create_session(
+    user_id="user123",
+    metadata={"source": "web"}
+)
+
+# 获取会话
+session = session_mgr.get_session(session_id)
+
+# 更新会话
+session_mgr.update_session(session_id, metadata={"last_action": "infer"})
+
+# 关闭会话
+session_mgr.close_session(session_id)
+
+# 获取用户的所有活跃会话
+sessions = session_mgr.get_active_sessions(user_id="user123")
+```
+
+#### 对话管理
+
+```python
+from src.context import get_conversation_manager
+
+conv_mgr = get_conversation_manager()
+
+# 添加用户消息
+conv_mgr.add_user_message(session_id, "帮我分析这张病理图片")
+
+# 添加助手消息
+conv_mgr.add_assistant_message(session_id, "好的，请提供图片路径")
+
+# 添加工具返回消息
+conv_mgr.add_tool_message(
+    session_id,
+    tool_name="infer_medical_image",
+    content="图像分析完成：FSGS改变"
+)
+
+# 获取对话历史（格式化）
+history = conv_mgr.get_history_formatted(session_id)
+
+# 获取最近 N 条消息
+messages = conv_mgr.get_last_n_messages(session_id, n=10)
+
+# 清空对话历史
+conv_mgr.clear_history(session_id)
+```
+
+#### 工具调用记录
+
+```python
+from src.context import get_tool_call_recorder
+
+recorder = get_tool_call_recorder()
+
+# 记录工具调用
+recorder.record_tool_execution(
+    session_id=session_id,
+    tool_name="infer_medical_image",
+    arguments={"image_path": "./1.png"},
+    result="FSGS改变",
+    status="success"
+)
+
+# 获取工具调用统计
+stats = recorder.get_tool_statistics(session_id)
+
+# 获取会话的工具调用记录
+calls = recorder.get_calls_by_session(session_id)
+```
+
+#### 任务管理
+
+```python
+from src.context import get_task_manager
+
+task_mgr = get_task_manager()
+
+# 创建任务
+task = task_mgr.create_task(metadata={
+    "type": "病理分析",
+    "patient_id": "P001"
+})
+task_id = task.task_id
+
+# 添加执行步骤
+task.add_step("image_receive", {"image": "1.png", "size": "2MB"})
+task.add_step("infer", {"result": "FSGS", "confidence": 0.95})
+task.add_step("rag_search", {"query": "FSGS治疗方案", "results": 5})
+
+# 添加结果文件
+task.add_result("diagnosis.json", '{"diagnosis": "FSGS", "recommendation": "激素治疗"}')
+
+# 追加历史记录
+task.append_history("## 额外说明\n\n患者有高血压病史。\n")
+
+# 生成完整报告
+report_path = task.generate_report()
+
+# 获取任务列表
+tasks = task_mgr.list_tasks(status="created")
+```
+
+### 5. 配置项
+
+在 `config/config.yaml` 中可以配置上下文管理参数：
+
+```yaml
+# MySQL 数据库配置
+database:
+  mysql:
+    host: "localhost"
+    port: 3306
+    user: "root"
+    password: "${MYSQL_PASSWORD}"
+    database: "kidney_agent"
+
+# 上下文管理配置
+context:
+  session_timeout: 3600       # 会话超时时间（秒），默认1小时
+  max_history: 50           # 最大保留消息数
+  task_dir: "./tasks"       # 任务文件存储目录
+  task_retention_days: 90   # 任务保留天数
 ```
 
 ## 日志系统

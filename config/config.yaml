@@ -63,11 +63,24 @@ mcp:
       params:
         top_k: 10
 
-# 批量处理配置 (aa.py)
-batch:
-  max_workers: 10
-  batch_size: 10
-  delay_per_batch: 1.0
-  retry_times: 3
-  retry_delay: 1.0
-  timeout: 30
+# MySQL 数据库配置
+database:
+  mysql:
+    host: "localhost"
+    port: 3306
+    user: "root"
+    password: "${MYSQL_PASSWORD}"  # 从环境变量读取
+    database: "kidney_agent"
+
+# 上下文管理配置
+context:
+  # 会话上下文配置
+  session_timeout: 3600  # 会话超时时间（秒），1小时
+  max_concurrent_sessions: 100  # 最大并发会话数
+
+  # 对话上下文配置
+  max_history: 50  # 最大保留消息数
+
+  # 任务上下文配置
+  task_dir: "./tasks"  # 任务文件存储目录
+  task_retention_days: 90  # 任务保留天数
