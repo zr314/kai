@@ -1,0 +1,24 @@
+# 核心依赖
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# 模型与推理
+torch>=2.0.0
+transformers>=4.40.0
+qwen-vl-utils
+peft>=0.10.0
+
+# 向量数据库
+pymilvus>=2.3.0
+
+# API 服务
+fastapi>=0.110.0
+uvicorn>=0.27.0
+
+# 阿里云百炼
+dashscope>=1.14.0
+
+# MCP
+mcp>=1.0.0
+
+# 可选：结构化日志

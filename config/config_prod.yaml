@@ -1,0 +1,16 @@
+# 环境特定配置 - 生产环境
+app:
+  environment: "prod"
+  debug: false
+
+logging:
+  level: "INFO"
+  console:
+    level: "WARNING"
+
+server:
+  reload: false
+
+batch:
+  max_workers: 20
+  timeout: 60

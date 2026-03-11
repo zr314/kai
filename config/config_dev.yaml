@@ -1,0 +1,12 @@
+# 环境特定配置 - 开发环境
+app:
+  environment: "dev"
+  debug: true
+
+logging:
+  level: "DEBUG"
+  console:
+    level: "DEBUG"
+
+server:
+  reload: true

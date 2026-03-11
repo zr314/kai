@@ -1,0 +1,73 @@
+# 应用配置
+app:
+  name: "kidney-medical-agent"
+  version: "1.0.0"
+  environment: "dev"  # dev | prod
+
+# 服务配置
+server:
+  host: "0.0.0.0"
+  port: 8001
+  reload: true  # 开发环境开启热重载
+
+# 日志配置
+logging:
+  level: "DEBUG"  # DEBUG | INFO | WARNING | ERROR
+  format: "json"  # json | text
+  file:
+    enabled: true
+    path: "./logs/app.log"
+    max_bytes: 10485760  # 10MB
+    backup_count: 5
+  console:
+    enabled: true
+    level: "INFO"
+
+# Milvus 向量数据库配置
+milvus:
+  host: "localhost"
+  port: 19530
+  collection: "kidney_rag_collection"
+  dimension: 1024
+  metric_type: "COSINE"
+  nprobe: 50
+
+# 阿里云百炼配置
+dashscope:
+  api_key: "${DASHSCOPE_API_KEY}"  # 从环境变量读取
+  embedding_model: "text-embedding-v4"
+
+# 模型配置
+model:
+  base_path: "./Qwen3-VL-4B-Instruct"
+  lora_path: "./qwen3vl-4b-medical-lora-sft"
+  device: "cuda"
+  max_new_tokens: 512
+  temperature: 0.7
+  top_p: 0.8
+
+# MCP 工具配置
+mcp:
+  tools:
+    # 图像推理工具
+    - name: "infer_medical_image"
+      enabled: true
+      description: "对肾小球病理图片进行诊断"
+      params:
+        image_path: "./1.png"
+
+    # RAG 知识库检索工具
+    - name: "search_knowledge_base"
+      enabled: true
+      description: "在医学知识库中进行RAG检索"
+      params:
+        top_k: 10
+
+# 批量处理配置 (aa.py)
+batch:
+  max_workers: 10
+  batch_size: 10
+  delay_per_batch: 1.0
+  retry_times: 3
+  retry_delay: 1.0
+  timeout: 30

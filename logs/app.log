@@ -1,0 +1,5 @@
+{"timestamp": "2026-03-11T07:32:21.027019Z", "level": "INFO", "logger": "config.logger", "message": "日志系统初始化完成", "module": "logger", "function": "init", "line": 197}
+{"timestamp": "2026-03-11T07:32:21.027019Z", "level": "INFO", "logger": "test", "message": "日志系统测试", "module": "<string>", "function": "<module>", "line": 1}
+{"timestamp": "2026-03-11T07:33:22.629250Z", "level": "INFO", "logger": "config.logger", "message": "日志系统初始化完成", "module": "logger", "function": "init", "line": 197}
+{"timestamp": "2026-03-11T07:33:22.629250Z", "level": "INFO", "logger": "test", "message": "Test log message", "module": "test_config", "function": "<module>", "line": 9}
+{"timestamp": "2026-03-11T07:33:22.629250Z", "level": "INFO", "logger": "test", "message": "Log with request ID", "module": "test_config", "function": "<module>", "line": 12}
